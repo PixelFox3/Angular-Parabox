@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * {
     margin: 0;
@@ -6,39 +6,39 @@
     box-sizing: border-box;
 }
 
-/* Light — hologram-inspired with bright colors */
+/* Light — orange-inspired with warm colors */
 :root {
-    --primary-color: #0077aa;
-    --accent-color: #7af6ff;
-    --accent-text: #005577;
-    --text-on-accent: #031a22;
+    --primary-color: #aa6600;
+    --accent-color: #ff7300;
+    --accent-text: #774000;
+    --text-on-accent: #221403;
     --color-success: #1b8c50;
-    --background-color: #f0fbff;
+    --background-color: #fff9f0;
     --surface-color: #ffffff;
-    --text-color: #052a3d;
-    --text-secondary: #1e6a8a;
-    --border-color: #a8e6f0;
-    --shadow-color: rgba(0, 119, 170, 0.14);
+    --text-color: #3d2905;
+    --text-secondary: #8a5f1e;
+    --border-color: #f0c7a8;
+    --shadow-color: rgba(170, 102, 0, 0.14);
 }
 
-/* Dark — Hologram */
+/* Dark — Ember */
 :root[data-theme="dark"] {
-    --primary-color: #81c7ff;
-    --accent-color: #00b8d9;
-    --accent-text: #7af6ff;
-    --text-on-accent: #021118;
+    --primary-color: #ffb381;
+    --accent-color: #ff7300;
+    --accent-text: #ffab7a;
+    --text-on-accent: #181002;
     --color-success: #22c55e;
-    --background-color: #050c16;
-    --surface-color: #081a2f;
-    --text-color: #d8f6ff;
-    --text-secondary: #8ec0d6;
-    --border-color: #2a6583;
-    --shadow-color: rgba(10, 64, 105, 0.4);
+    --background-color: #080704;
+    --surface-color: #110802;
+    --text-color: #ffedd8;
+    --text-secondary: #d6b98e;
+    --border-color: #412411;
+    --shadow-color: rgba(105, 80, 10, 0.4);
 }
 
 html,
 body {
-    font-family: 'Exo 2', 'Trebuchet MS', sans-serif;
+    font-family: 'Tomorrow', 'Trebuchet MS', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     min-height: 100vh;
@@ -46,7 +46,7 @@ body {
     background:
         radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--accent-color) 30%, transparent), transparent 35%),
         radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--primary-color) 32%, transparent), transparent 36%),
-        linear-gradient(165deg, color-mix(in srgb, var(--background-color) 92%, #000814), var(--background-color));
+        linear-gradient(165deg, color-mix(in srgb, var(--background-color) 92%, #141200), var(--background-color));
     transition: background-color 0.35s ease, color 0.35s ease;
 }
 
@@ -54,7 +54,7 @@ h1,
 h2,
 h3,
 .theme-label {
-    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-family: 'Tomorrow', 'Segoe UI', sans-serif;
     letter-spacing: 0.02em;
 }
 

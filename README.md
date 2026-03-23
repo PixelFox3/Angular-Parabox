@@ -440,7 +440,3 @@ import { Observable } from 'rxjs';
 - [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns)
 
 ---
-
-**Último actualizado:** Marzo 2026  
-**Versión:** 0.0.0  
-**Angular:** 21.2.0
