@@ -1,0 +1,15 @@
+<div class="home-container">
+    <div class="hero">
+        <p>Nada y todo puede ser:</p>
+        <h2>POSIMPOSIBLE</h2>
+    </div>
+
+    <div class="products-section">
+        <h3>Catálogo de Productos</h3>
+        <div class="products-grid">
+            @for (product of products(); track product.id) {
+            <app-product [product]="product" />
+            }
+        </div>
+    </div>
+</div>

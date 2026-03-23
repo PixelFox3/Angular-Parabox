@@ -1,0 +1,6 @@
+<button class="fab" type="button" (click)="toggle()" aria-label="Abrir carrito">
+    <span class="icon">Carrito</span>
+    @if (cartService.itemCount() > 0) {
+    <span class="badge">{{ cartService.itemCount() }}</span>
+    }
+</button>

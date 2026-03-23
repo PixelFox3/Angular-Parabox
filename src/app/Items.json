@@ -1,0 +1,212 @@
+[
+    {
+        "id": 1,
+        "nombre": "Batería 5V con timbales",
+        "precio": 59.99,
+        "imagen": "resources/img/bateria-timbales.jpg",
+        "descripcion": "Ideal para músicos electrónicos y eléctricos. ¡No incluye baquetas ni pilas!"
+    },
+    {
+        "id": 2,
+        "nombre": "Vela a babor con mecha ecológica",
+        "precio": 12.00,
+        "imagen": "resources/img/vela-babor.jpg",
+        "descripcion": "Navega y alumbra al mismo tiempo, sin contaminar el mar ni la mesa."
+    },
+    {
+        "id": 3,
+        "nombre": "Ratón inalámbrico para gatos",
+        "precio": 8.99,
+        "imagen": "resources/img/raton-gato.jpg",
+        "descripcion": "El único ratón que no necesita pilas ni queso. Diversión felina garantizada."
+    },
+    {
+        "id": 4,
+        "nombre": "Banco de peces portátil",
+        "precio": 25.00,
+        "imagen": "resources/img/banco-peces.jpg",
+        "descripcion": "Llévate tus ahorros a nadar. No apto para tiburones financieros."
+    },
+    {
+        "id": 5,
+        "nombre": "Llave inglesa bilingüe",
+        "precio": 14.50,
+        "imagen": "resources/img/llave-bilingue.jpg",
+        "descripcion": "Aprieta tuercas en dos idiomas. Compatible con tornillos políglotas."
+    },
+    {
+        "id": 6,
+        "nombre": "Caña de pescar WiFi",
+        "precio": 33.33,
+        "imagen": "resources/img/cana-wifi.jpg",
+        "descripcion": "Pesca datos y peces a la vez. Señal variable según la marea."
+    },
+    {
+        "id": 7,
+        "nombre": "Sillon",
+        "precio": 69.69,
+        "imagen": "resources/img/puto-sillon.png",
+        "descripcion": "Es un puto sillon."
+    },
+    {
+        "id": 8,
+        "nombre": "Cartera con fondos reservados",
+        "precio": 99.99,
+        "imagen": "resources/img/cartera.jpg",
+        "descripcion": "Siempre parece llena, pero nunca puedes sacar nada. Ideal para ahorrar."
+    },
+    {
+        "id": 9,
+        "nombre": "Gato hidráulico de peluche",
+        "precio": 18.18,
+        "imagen": "resources/img/gato-peluche.jpg",
+        "descripcion": "Levanta tu ánimo y tu coche. No recomendado para alérgicos a los peluches."
+    },
+    {
+        "id": 10,
+        "nombre": "Cinta métrica de cassette",
+        "precio": 7.77,
+        "imagen": "resources/img/cinta-cassette.jpg",
+        "descripcion": "Mide tus éxitos musicales y tus muebles. Rebobina para empezar de nuevo."
+    },
+    {
+        "id": 11,
+        "nombre": "Ratón óptico de biblioteca",
+        "precio": 6.66,
+        "imagen": "resources/img/raton-biblioteca.jpg",
+        "descripcion": "Lee libros y mueve el cursor. Solo funciona en silencio."
+    },
+    {
+        "id": 12,
+        "nombre": "Silla eléctrica de jardín solar",
+        "precio": 120.00,
+        "imagen": "resources/img/silla-electrica.jpg",
+        "descripcion": "Se carga al sol y descarga a los invitados. No usar en días nublados."
+    },
+    {
+        "id": 13,
+        "nombre": "Aire enlatado del Everest",
+        "precio": 49.99,
+        "imagen": "resources/img/aire.jpg",
+        "descripcion": "Respira profundo, sabor a aventura. No apto para alpinistas con vértigo."
+    },
+    {
+        "id": 14,
+        "nombre": "Calcetín sin pareja",
+        "precio": 2.50,
+        "imagen": "resources/img/calcetin.jpg",
+        "descripcion": "Ideal para solteros y lavadoras hambrientas."
+    },
+    {
+        "id": 15,
+        "nombre": "Manual para entender manuales",
+        "precio": 15.00,
+        "imagen": "resources/img/manual.jpg",
+        "descripcion": "Incluye instrucciones para leer instrucciones."
+    },
+    {
+        "id": 16,
+        "nombre": "Cuchara invisible",
+        "precio": 0.00,
+        "imagen": "resources/img/cuchara.jpg",
+        "descripcion": "Perfecta para dietas imaginarias. No la pierdas de vista."
+    },
+    {
+        "id": 17,
+        "nombre": "Cable inalámbrico",
+        "precio": 5.99,
+        "imagen": "resources/img/cable.jpg",
+        "descripcion": "Conecta nada a ninguna parte. Garantía de desconexión total."
+    },
+    {
+        "id": 18,
+        "nombre": "Agua deshidratada",
+        "precio": 1.99,
+        "imagen": "resources/img/agua.jpg",
+        "descripcion": "Solo añade agua. Ideal para viajeros ligeros."
+    },
+    {
+        "id": 19,
+        "nombre": "Ladrillo Bluetooth",
+        "precio": 79.99,
+        "imagen": "resources/img/ladrillo.jpg",
+        "descripcion": "Construye tu red sin cables. Compatible con paredes inteligentes."
+    },
+    {
+        "id": 20,
+        "nombre": "Silla plegable de aire",
+        "precio": 12.00,
+        "imagen": "resources/img/silla.jpg",
+        "descripcion": "Llévala a todas partes, siéntate en ninguna."
+    },
+    {
+        "id": 21,
+        "nombre": "Cargador solar nocturno",
+        "precio": 25.00,
+        "imagen": "resources/img/cargador.jpg",
+        "descripcion": "Carga tus dispositivos mientras duermes... o no."
+    },
+    {
+        "id": 22,
+        "nombre": "Kit de invisibilidad para gatos",
+        "precio": 199.99,
+        "imagen": "resources/img/gato.jpg",
+        "descripcion": "Haz que tu gato desaparezca (bajo su propio criterio)."
+    },
+    {
+        "id": 23,
+        "nombre": "Cinta adhesiva líquida",
+        "precio": 3.50,
+        "imagen": "resources/img/cinta.jpg",
+        "descripcion": "Pega lo que quieras, si lo encuentras."
+    },
+    {
+        "id": 24,
+        "nombre": "Linterna solar para cuevas",
+        "precio": 18.00,
+        "imagen": "resources/img/linterna.jpg",
+        "descripcion": "Ilumina donde nunca llega el sol."
+    },
+    {
+        "id": 25,
+        "nombre": "Paraguas para interiores",
+        "precio": 7.25,
+        "imagen": "resources/img/paraguas.jpg",
+        "descripcion": "Protégete de lluvias imaginarias y goteras emocionales."
+    },
+    {
+        "id": 26,
+        "nombre": "Despertador silencioso",
+        "precio": 14.99,
+        "imagen": "resources/img/despertador.jpg",
+        "descripcion": "No suena nunca. Perfecto para dormilones profesionales."
+    },
+    {
+        "id": 27,
+        "nombre": "Tijeras para zurdos diestros",
+        "precio": 6.66,
+        "imagen": "resources/img/tijeras.jpg",
+        "descripcion": "Cortan igual de mal con cualquier mano."
+    },
+    {
+        "id": 28,
+        "nombre": "Adaptador USB-A a carbón",
+        "precio": 15.15,
+        "imagen": "resources/img/cargador-carbon.jpg",
+        "descripcion": "Convierte energía digital en barbacoa."
+    },
+    {
+        "id": 29,
+        "nombre": "Gafas de sol nocturnas",
+        "precio": 9.99,
+        "imagen": "resources/img/gafas-sol.jpg",
+        "descripcion": "Oscurecen la noche para dormir mejor."
+    },
+    {
+        "id": 30,
+        "nombre": "Reloj de arena digital",
+        "precio": 13.13,
+        "imagen": "resources/img/reloj-arena.jpg",
+        "descripcion": "Cuenta el tiempo en bits de arena."
+    }
+]

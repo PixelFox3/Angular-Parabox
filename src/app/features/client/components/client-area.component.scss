@@ -1,0 +1,105 @@
+:host {
+    display: block;
+}
+
+.client-area {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.heading {
+    h1 {
+        margin: 0;
+        color: var(--text-color);
+        font-size: 1.9rem;
+    }
+
+    p {
+        margin: 0.5rem 0 0;
+        color: var(--text-secondary);
+    }
+}
+
+.layout {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+.settings-panel {
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background-color: var(--surface-color);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    padding: 1rem 1.1rem;
+}
+
+form {
+    display: grid;
+    gap: 0.8rem;
+}
+
+label {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input,
+select {
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 0.6rem 0.7rem;
+    background: var(--background-color);
+    color: var(--text-color);
+    font: inherit;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 500;
+}
+
+.save-btn {
+    border: 1px solid color-mix(in srgb, var(--accent-color) 75%, white);
+    background: linear-gradient(120deg, color-mix(in srgb, var(--accent-color) 82%, black), var(--accent-color));
+    color: var(--text-on-accent);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+}
+
+.saved {
+    margin: 0.75rem 0 0;
+    color: var(--color-success);
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .client-area {
+        padding: 1rem;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.store-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}

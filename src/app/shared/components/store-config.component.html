@@ -1,0 +1,46 @@
+<div class="store-config">
+    <h2>Configuración de Tienda</h2>
+
+    <div class="config-section">
+        <label for="country-select">País / Región</label>
+        <select id="country-select" [ngModel]="selectedCountry()" (ngModelChange)="onCountryChange($event)"
+            class="select-control">
+            @for (country of availableCountries; track country.code) {
+            <option [value]="country.code">
+                {{ country.name }} ({{ country.currency }})
+            </option>
+            }
+        </select>
+    </div>
+
+    <div class="config-section">
+        <div class="config-info">
+            <p><strong>Símbolo de moneda:</strong> {{ currentConfig.currencySymbol }}</p>
+            <p><strong>Moneda:</strong> {{ currentConfig.currency }}</p>
+            <p><strong>{{ currentConfig.taxLabel }}:</strong> {{ (currentConfig.taxRate * 100) | number: '1.0-0' }}%</p>
+        </div>
+    </div>
+
+    <div class="config-section">
+        <label class="toggle-label">
+            <input type="checkbox" [checked]="storeConfig.showPricesWithTax()"
+                (change)="onShowPricesWithTaxChange($event)" class="toggle-checkbox" />
+            <span>Mostrar precios con {{ currentConfig.taxLabel }} incluido</span>
+        </label>
+        <p class="toggle-description">
+            @if (storeConfig.showPricesWithTax()) {
+            Los precios mostrados incluyen los impuestos.
+            } @else {
+            Los impuestos se mostrarán aparte al finalizar la compra.
+            }
+        </p>
+
+        @if (storeConfig.showPricesWithTax()) {
+        <label class="toggle-label toggle-nested">
+            <input type="checkbox" [checked]="storeConfig.showBasePriceWhenTaxShown()"
+                (change)="onShowBasePriceWhenTaxShownChange($event)" class="toggle-checkbox" />
+            <span>Mostrar también el precio sin {{ currentConfig.taxLabel }}</span>
+        </label>
+        }
+    </div>
+</div>

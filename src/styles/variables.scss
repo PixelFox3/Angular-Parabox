@@ -1,0 +1,72 @@
+// Spacing scale
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+// Border radius
+$radius-small: 4px;
+$radius-medium: 8px;
+$radius-large: 12px;
+
+// Font sizes
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-base: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+$font-size-2xl: 32px;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Shadows
+@mixin shadow-sm {
+    box-shadow: 0 1px 2px 0 var(--shadow-color);
+}
+
+@mixin shadow-md {
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+@mixin shadow-lg {
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+}
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+    @if $breakpoint =='sm' {
+        @media (min-width: $breakpoint-sm) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='md' {
+        @media (min-width: $breakpoint-md) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='lg' {
+        @media (min-width: $breakpoint-lg) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='xl' {
+        @media (min-width: $breakpoint-xl) {
+            @content;
+        }
+    }
+}

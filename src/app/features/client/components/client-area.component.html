@@ -1,0 +1,50 @@
+<main class="client-area">
+    <header class="heading">
+        <h1>Area de cliente</h1>
+        <p>Gestiona tu perfil y preferencias de la tienda.</p>
+    </header>
+
+    <div class="layout">
+        <app-client [name]="profileName()" [email]="profileEmail()" [notificationsEnabled]="notificationsEnabled()" />
+
+        <section class="settings-panel" aria-label="Ajustes de cliente">
+            <form [formGroup]="settingsForm" (ngSubmit)="save()" novalidate>
+                <label>
+                    Nombre visible
+                    <input type="text" formControlName="name" placeholder="Tu nombre" />
+                </label>
+
+                <label>
+                    Correo electronico
+                    <input type="email" formControlName="email" placeholder="tu@email.com" />
+                </label>
+
+                <label>
+                    Tema preferido
+                    <select formControlName="theme">
+                        @for (theme of themeService.themes; track theme) {
+                        <option [value]="theme">{{ themeService.themeLabels[theme] }}</option>
+                        }
+                    </select>
+                </label>
+
+                <label class="toggle-row">
+                    <input type="checkbox" formControlName="notificationsEnabled" />
+                    Recibir notificaciones de ofertas
+                </label>
+
+                <button class="save-btn" type="submit" [disabled]="settingsForm.invalid">
+                    Guardar ajustes
+                </button>
+            </form>
+
+            @if (savedMessageVisible()) {
+            <p class="saved">Ajustes guardados correctamente.</p>
+            }
+        </section>
+    </div>
+
+    <section class="store-section" aria-label="Configuración de tienda">
+        <app-store-config />
+    </section>
+</main>

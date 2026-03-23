@@ -1,0 +1,13 @@
+/* TEAM */
+Developer: PixelFox
+Contact: contacto@parabox.com
+From: Spain
+
+/* SITE */
+Last update: 2026-03-23
+Theme: Objetos paradójicos imposibles
+Standards: HTML5, CSS3, Angular 20+
+Components: Standalone, Signals, PWA
+
+/* THANKS */
+Thanks: Comunidad Angular, Open Source, Amantes de las paradojas

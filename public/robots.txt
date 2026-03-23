@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive or private paths
+Disallow: /admin/
+Disallow: /login/
+
+Sitemap: /sitemap.xml

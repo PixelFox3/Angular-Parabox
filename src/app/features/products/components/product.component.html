@@ -1,0 +1,31 @@
+<div class="product-card">
+    <div class="product-image">
+        <img [ngSrc]="product().image" [alt]="product().name" width="420" height="260" />
+    </div>
+
+    <div class="product-content">
+        <h3 class="product-name">{{ product().name }}</h3>
+        <p class="product-description">{{ product().description }}</p>
+
+        <div class="product-footer">
+            <div class="product-price">
+                @if (showPricesWithTax()) {
+                <span class="price-label">Precio ({{ taxLabel() }} inc.)</span>
+                <span class="price-value">{{ currencySymbol() }}{{ displayPrice() | number: '1.2-2' }}</span>
+                @if (basePriceVisible()) {
+                <span class="price-base">sin {{ taxLabel() }}: {{ currencySymbol() }}{{ product().price | number:
+                    '1.2-2' }}</span>
+                }
+                } @else {
+                <span class="price-label">Precio</span>
+                <span class="price-value">{{ currencySymbol() }}{{ displayPrice() | number: '1.2-2' }}</span>
+                }
+            </div>
+
+            <button class="btn-add-cart" (click)="addToCart()"
+                [attr.aria-label]="'Agregar ' + product().name + ' al carrito'">
+                + Agregar
+            </button>
+        </div>
+    </div>
+</div>

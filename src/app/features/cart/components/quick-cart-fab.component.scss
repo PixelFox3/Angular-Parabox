@@ -1,0 +1,58 @@
+:host {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 130;
+}
+
+.fab {
+    border: 1px solid color-mix(in srgb, var(--accent-color) 75%, white);
+    background: linear-gradient(120deg, color-mix(in srgb, var(--accent-color) 82%, black), var(--accent-color));
+    color: var(--text-on-accent);
+    border-radius: 999px;
+    min-height: 3.2rem;
+    padding: 0.7rem 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-weight: 700;
+    box-shadow: 0 10px 24px var(--shadow-color);
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px var(--shadow-color);
+    }
+
+    &:focus-visible {
+        outline: 3px solid color-mix(in srgb, var(--primary-color) 65%, white);
+        outline-offset: 2px;
+    }
+}
+
+.badge {
+    min-width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 999px;
+    background: var(--surface-color);
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 0 0.3rem;
+}
+
+@media (max-width: 768px) {
+    :host {
+        right: 0.75rem;
+        bottom: 0.75rem;
+    }
+
+    .fab {
+        min-height: 3rem;
+        padding: 0.65rem 1rem;
+    }
+}

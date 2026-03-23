@@ -1,0 +1,78 @@
+/* Light theme — Hologram-inspired */
+:root {
+    --primary-color: #0077aa;
+    --accent-color: #00b8d9;
+    --background-color: #f0fbff;
+    --surface-color: #ffffff;
+    --text-color: #052a3d;
+    --text-secondary: #1e6a8a;
+    --border-color: #a8e6f0;
+    --shadow-color: rgba(0, 119, 170, 0.14);
+}
+
+/* Dark theme — Hologram */
+:root[data-theme="dark"] {
+    --primary-color: #81c7ff;
+    --accent-color: #7af6ff;
+    --background-color: #050c16;
+    --surface-color: #081a2f;
+    --text-color: #d8f6ff;
+    --text-secondary: #8ec0d6;
+    --border-color: #2a6583;
+    --shadow-color: rgba(10, 64, 105, 0.4);
+}
+
+/* Apply theme variables globally */
+html,
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions for theme switching */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Interactive elements transitions */
+button,
+a,
+input {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Cyberpunk animations */
+@keyframes scan-lines {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes neon-flicker {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(255, 0, 110, 0.6);
+    }
+}
+
+@keyframes neon-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(255, 0, 110, 0.6);
+    }
+}

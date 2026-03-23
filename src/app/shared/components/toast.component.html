@@ -1,0 +1,25 @@
+<div class="toast-stack" aria-live="polite" aria-atomic="false">
+    @for (toast of toastService.toasts(); track toast.id) {
+    <div class="toast" [attr.data-type]="toast.type" role="status">
+        <span class="toast-icon" aria-hidden="true"></span>
+        <span class="toast-message">{{ toast.message }}</span>
+        <button class="toast-close" type="button" (click)="toastService.dismiss(toast.id)"
+            aria-label="Cerrar notificación">×</button>
+    </div>
+    }
+</div>
+
+@if (toastService.confirmDialog(); as dialog) {
+<div class="confirm-backdrop" role="presentation" (click)="toastService.resolveConfirm(false)">
+    <div class="confirm-card" role="alertdialog" aria-modal="true" aria-labelledby="confirm-msg"
+        (click)="$event.stopPropagation()">
+        <p id="confirm-msg" class="confirm-message">{{ dialog.message }}</p>
+        <div class="confirm-actions">
+            <button class="btn-cancel" type="button" (click)="toastService.resolveConfirm(false)">{{ dialog.cancelLabel
+                }}</button>
+            <button class="btn-confirm" type="button" (click)="toastService.resolveConfirm(true)" cdkFocusInitial>{{
+                dialog.confirmLabel }}</button>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,54 @@
+@if (cartService.isDrawerOpen()) {
+<button class="sidebar-overlay" type="button" (click)="close()" aria-label="Cerrar carrito"></button>
+}
+
+<aside class="sidebar" [class.open]="cartService.isDrawerOpen()" aria-label="Carrito lateral">
+    <header class="sidebar-header">
+        <h2>Carrito</h2>
+        <button class="icon-btn" type="button" (click)="close()" aria-label="Ocultar carrito">×</button>
+    </header>
+
+    @if (cartService.items().length === 0) {
+    <div class="empty-state">
+        <p>Tu carrito está vacío.</p>
+        <a routerLink="/" (click)="close()">Explorar productos</a>
+    </div>
+    } @else {
+    <div class="items-list">
+        @for (item of cartService.items(); track item.product.id) {
+        <article class="item-row">
+            <img [ngSrc]="item.product.image" [alt]="item.product.name" width="72" height="72" />
+            <div class="item-content">
+                <h3>{{ item.product.name }}</h3>
+                <p class="item-price">{{ currencySymbol }}{{ item.product.price | number: '1.2-2' }}</p>
+                <div class="item-controls">
+                    <button type="button" (click)="decrement(item.product.id)"
+                        [attr.aria-label]="'Disminuir cantidad de ' + item.product.name">−</button>
+                    <span>{{ item.quantity }}</span>
+                    <button type="button" (click)="increment(item.product.id)"
+                        [attr.aria-label]="'Aumentar cantidad de ' + item.product.name">+</button>
+                    <button class="remove" type="button" (click)="remove(item.product.id)">Quitar</button>
+                </div>
+            </div>
+        </article>
+        }
+    </div>
+
+    <footer class="sidebar-footer">
+        <div class="totals">
+            <span>Subtotal</span>
+            <strong>{{ currencySymbol }}{{ cartService.total() | number: '1.2-2' }}</strong>
+        </div>
+        <div class="totals">
+            <span>{{ taxLabel }} ({{ (taxRate * 100) | number: '1.0-0' }}%)</span>
+            <strong>{{ currencySymbol }}{{ (cartService.total() * taxRate) | number: '1.2-2' }}</strong>
+        </div>
+        <div class="totals total">
+            <span>Total</span>
+            <strong>{{ currencySymbol }}{{ (cartService.total() * (1 + taxRate)) | number: '1.2-2' }}</strong>
+        </div>
+        <a class="full-cart-link" routerLink="/cart" (click)="close()">Ver carrito completo</a>
+        <button class="checkout-btn" type="button" (click)="checkout()">Finalizar compra</button>
+    </footer>
+    }
+</aside>
