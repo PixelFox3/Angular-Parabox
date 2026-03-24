@@ -2,12 +2,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CartSidebarComponent } from './features/cart/components/cart-sidebar.component';
 import { QuickCartFabComponent } from './features/cart/components/quick-cart-fab.component';
+import { FooterComponent } from './shared/components/footer.component';
 import { NavbarComponent } from './shared/components/navbar.component';
 import { ToastComponent } from './shared/components/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CartSidebarComponent, NavbarComponent, QuickCartFabComponent, RouterOutlet, ToastComponent],
+  imports: [CartSidebarComponent, FooterComponent, NavbarComponent, QuickCartFabComponent, RouterOutlet, ToastComponent],
   template: `
     <app-navbar />
     <app-cart-sidebar />
@@ -16,6 +17,7 @@ import { ToastComponent } from './shared/components/toast.component';
     <main class="main-content">
       <router-outlet />
     </main>
+    <app-footer />
   `,
   styles: `
     :host {

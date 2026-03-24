@@ -1,5 +1,8 @@
 # PARABOX - E-Commerce Showcase Angular
 
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-paraboxstore.vercel.app-00b8d9?style=for-the-badge&logo=vercel&logoColor=white)](https://paraboxstore.vercel.app)
+[![Roadmap](https://img.shields.io/badge/🗺️%20Roadmap-ver%20fases-0077aa?style=for-the-badge&logo=github&logoColor=white)](./roadmap.md)
+
 Un proyecto de e-commerce moderno construido con **Angular 21** demostrando las mejores prácticas y patrones arquitectónicos actuales en desarrollo Angular.
 
 ## 📋 Tabla de Contenidos
@@ -382,28 +385,28 @@ import { Observable } from 'rxjs';
 
 ## 🛠️ Stack Tecnológico
 
-| Tecnología | Versión | Propósito |
-|---|---|---|
-| **Angular** | 21.2.0 | Framework principal |
-| **TypeScript** | 5.9.2 | Lenguaje de programación |
-| **RxJS** | 7.8.0 | Programación reactiva |
-| **Tailwind CSS** | 4.1.12 | Framework CSS |
-| **Vitest** | 4.0.8 | Testing unitario |
-| **PostCSS** | 8.5.3 | Procesamiento de CSS |
-| **Prettier** | 3.8.1 | Formateador de código |
+| Tecnología       | Versión | Propósito                |
+| ---------------- | ------- | ------------------------ |
+| **Angular**      | 21.2.0  | Framework principal      |
+| **TypeScript**   | 5.9.2   | Lenguaje de programación |
+| **RxJS**         | 7.8.0   | Programación reactiva    |
+| **Tailwind CSS** | 4.1.12  | Framework CSS            |
+| **Vitest**       | 4.0.8   | Testing unitario         |
+| **PostCSS**      | 8.5.3   | Procesamiento de CSS     |
+| **Prettier**     | 3.8.1   | Formateador de código    |
 
 ---
 
 ## 📊 Decisiones Arquitectónicas
 
-| Decisión | Razón |
-|---|---|
+| Decisión                   | Razón                                 |
+| -------------------------- | ------------------------------------- |
 | **Componentes Standalone** | Elimina NgModules, reduce boilerplate |
-| **OnPush CD** | Mejor rendimiento, predecible |
-| **Signals** | Modern, performante, zoneless-ready |
-| **Feature-Based** | Escalable, mantenible, testeable |
-| **Lazy Loading** | Reduce bundle inicial |
-| **Vitest** | Más rápido que Karma/Jasmine |
+| **OnPush CD**              | Mejor rendimiento, predecible         |
+| **Signals**                | Modern, performante, zoneless-ready   |
+| **Feature-Based**          | Escalable, mantenible, testeable      |
+| **Lazy Loading**           | Reduce bundle inicial                 |
+| **Vitest**                 | Más rápido que Karma/Jasmine          |
 
 ---
 
