@@ -1,0 +1,65 @@
+services:
+
+  # ─── NestJS API ────────────────────────────────────────────────────────────
+  api:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run start:dev"
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://parabox:parabox@postgres:5432/parabox_dev
+      REDIS_URL: redis://redis:6379
+      FRONTEND_URL: http://localhost:4200
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_FROM: noreply@parabox.local
+      JWT_SECRET: dev-secret-change-in-production
+      JWT_REFRESH_SECRET: dev-refresh-secret-change-in-production
+      ACCOUNT_TTL_DAYS: 7
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  # ─── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: parabox
+      POSTGRES_PASSWORD: parabox
+      POSTGRES_DB: parabox_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U parabox" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ─── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # ─── MailHog (dev email catcher) ────────────────────────────────────────────
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025" # SMTP — NestJS sends here
+      - "8025:8025" # Web UI — http://localhost:8025
+
+volumes:
+  postgres_data:
+  redis_data:

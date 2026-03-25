@@ -38,23 +38,30 @@ El proyecto implementa una **arquitectura basada en características (Feature-Ba
 ### Estructura de Directorios
 
 ```
-src/app/
-├── shared/                      # Componentes y servicios compartidos
-│   ├── components/
-│   └── services/
-│
-├── features/                    # Módulos de características independientes
-│   ├── FeatureName/
-│   │   ├── components/
-│   │   │   └── feature-name.component.ts
-│   │   └── services/
-│   │       └── feature-name.service.ts
-│   │
-│   └── ... (cart, products, client, checkout)
-│
-├── app.ts                       # Componente raíz
-├── app.routes.ts                # Configuración de rutas
-└── app.config.ts                # Configuración de la aplicación
+Angular-Parabox/                  ← Monorepo
+├── frontend/                     ← Angular 21 · deploy en Vercel
+│   ├── src/
+│   │   └── app/
+│   │       ├── shared/           # Componentes y servicios compartidos
+│   │       │   ├── components/
+│   │       │   └── services/
+│   │       ├── features/         # Módulos de características independientes
+│   │       │   ├── FeatureName/
+│   │       │   │   ├── components/
+│   │       │   │   └── services/
+│   │       │   └── ... (cart, products, client, checkout)
+│   │       ├── app.ts            # Componente raíz
+│   │       ├── app.routes.ts     # Configuración de rutas
+│   │       └── app.config.ts     # Configuración de la aplicación
+│   └── angular.json
+├── backend/                      ← NestJS API · deploy en Railway
+│   └── src/
+│       ├── modules/              # Un módulo NestJS por dominio
+│       ├── shared/               # Guards, interceptors, pipes globales
+│       └── main.ts
+├── shared/                       ← Tipos TypeScript compartidos
+│   └── types/                    # DTOs e interfaces (frontend ↔ backend)
+└── docker-compose.yml            ← Levanta todos los servicios localmente
 ```
 
 ### Patrón Feature-Based (Basado en Características)
