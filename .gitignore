@@ -3,8 +3,6 @@
 # ─── Compiled output (all workspaces) ──────────────────────────────────────────
 dist
 tmp
-out-tsc
-bazel-out
 
 # ─── Node (all workspaces) ─────────────────────────────────────────────────────
 node_modules
@@ -15,6 +13,7 @@ yarn-error.log
 .env.local
 .env.staging
 .env.production
+*.env
 # Keep .env.example committed (it's safe — no real secrets)
 
 # ─── IDEs and editors ──────────────────────────────────────────────────────────
@@ -34,16 +33,6 @@ yarn-error.log
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
-
-# ─── Angular ───────────────────────────────────────────────────────────────────
-.angular/cache
-.sass-cache/
-connect.lock
-coverage
-libpeerconnection.log
-testem.log
-typings
-__screenshots__/
 
 # ─── System files ──────────────────────────────────────────────────────────────
 .DS_Store

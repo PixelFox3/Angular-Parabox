@@ -1,5 +1,24 @@
-<section class="client-card" aria-label="Resumen de cliente">
-    <h2>{{ name() }}</h2>
-    <p class="email">{{ email() }}</p>
-    <p class="meta">Notificaciones: {{ notificationsEnabled() ? 'activadas' : 'desactivadas' }}</p>
+@if (user(); as u) {
+<section class="client-card" aria-label="Perfil de usuario">
+    <div class="avatar-row">
+        <div class="avatar" aria-hidden="true">{{ initials() }}</div>
+        <div class="user-info">
+            <h2 class="display-name">{{ displayName() }}</h2>
+            <p class="email">{{ u.email }}</p>
+        </div>
+    </div>
+
+    <div class="badges">
+        @if (u.role === 'ADMIN') {
+        <span class="badge badge-admin">Admin</span>
+        }
+        @if (u.emailVerified) {
+        <span class="badge badge-verified">Verificado</span>
+        }
+    </div>
+
+    <button class="logout-btn" (click)="logout()" [disabled]="isLoggingOut()" [attr.aria-busy]="isLoggingOut()">
+        @if (isLoggingOut()) { Cerrando sesión… } @else { Cerrar sesión }
+    </button>
 </section>
+}

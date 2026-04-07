@@ -21,7 +21,8 @@ import { ToastComponent } from './shared/components/toast.component';
   `,
   styles: `
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
     }
 

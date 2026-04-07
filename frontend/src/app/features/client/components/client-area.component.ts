@@ -4,15 +4,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientComponent } from './client.component';
 import { StoreConfigComponent } from '../../../shared/components/store-config.component';
 import { ThemeService, ThemeType } from '../../../shared/services/theme.service';
+import { AuthService } from '../../../core/services/auth.service';
 
-interface ClientSettings {
-  name: string;
-  email: string;
-  notificationsEnabled: boolean;
-  theme: ThemeType;
-}
-
-const CLIENT_SETTINGS_KEY = 'client-settings';
+const NOTIFICATIONS_KEY = 'parabox_notifications';
 
 @Component({
   selector: 'app-client-area',
@@ -24,25 +18,24 @@ const CLIENT_SETTINGS_KEY = 'client-settings';
 export class ClientAreaComponent {
   readonly themeService = inject(ThemeService);
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+
   private readonly savedMessage = signal(false);
+  readonly isSaving = signal(false);
+  readonly saveError = signal<string | null>(null);
+  readonly currentUser = this.authService.currentUser;
+  readonly savedMessageVisible = computed(() => this.savedMessage());
 
   readonly settingsForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.maxLength(60)]],
-    email: ['', [Validators.required, Validators.email]],
-    notificationsEnabled: [true],
+    name: ['', [Validators.maxLength(60)]],
+    notificationsEnabled: [this.readNotifications()],
     theme: [this.themeService.currentTheme$() as ThemeType],
   });
 
-  readonly profileName = computed(() => this.settingsForm.controls.name.value || 'Cliente');
-  readonly profileEmail = computed(() => this.settingsForm.controls.email.value || 'sin-correo@demo.com');
-  readonly notificationsEnabled = computed(() => this.settingsForm.controls.notificationsEnabled.value);
-  readonly savedMessageVisible = computed(() => this.savedMessage());
-
   constructor() {
-    const saved = this.readSettings();
-    if (saved) {
-      this.settingsForm.patchValue(saved);
-      this.themeService.setTheme(saved.theme);
+    const user = this.currentUser();
+    if (user) {
+      this.settingsForm.patchValue({ name: user.name ?? '' });
     }
   }
 
@@ -52,45 +45,34 @@ export class ClientAreaComponent {
       return;
     }
 
-    const value = this.settingsForm.getRawValue();
-    const settings: ClientSettings = {
-      name: value.name,
-      email: value.email,
-      notificationsEnabled: value.notificationsEnabled,
-      theme: value.theme,
-    };
-
-    localStorage.setItem(CLIENT_SETTINGS_KEY, JSON.stringify(settings));
-    this.themeService.setTheme(settings.theme);
-
-    this.savedMessage.set(true);
-    window.setTimeout(() => this.savedMessage.set(false), 1800);
-  }
-
-  private readSettings(): ClientSettings | null {
-    const raw = localStorage.getItem(CLIENT_SETTINGS_KEY);
-    if (!raw) {
-      return null;
-    }
+    const { name, theme, notificationsEnabled } = this.settingsForm.getRawValue();
+    this.themeService.setTheme(theme);
 
     try {
-      const parsed = JSON.parse(raw) as Partial<ClientSettings>;
-      if (!parsed.name || !parsed.email || !parsed.theme) {
-        return null;
-      }
+      localStorage.setItem(NOTIFICATIONS_KEY, String(notificationsEnabled));
+    } catch { /* ignore */ }
 
-      if (!this.themeService.themes.includes(parsed.theme)) {
-        return null;
-      }
+    this.isSaving.set(true);
+    this.saveError.set(null);
 
-      return {
-        name: parsed.name,
-        email: parsed.email,
-        notificationsEnabled: parsed.notificationsEnabled ?? true,
-        theme: parsed.theme,
-      };
+    this.authService.updateProfile(name || null).subscribe({
+      next: () => {
+        this.isSaving.set(false);
+        this.savedMessage.set(true);
+        window.setTimeout(() => this.savedMessage.set(false), 1800);
+      },
+      error: () => {
+        this.isSaving.set(false);
+        this.saveError.set('Error al guardar los cambios. Intenta de nuevo.');
+      },
+    });
+  }
+
+  private readNotifications(): boolean {
+    try {
+      return localStorage.getItem(NOTIFICATIONS_KEY) !== 'false';
     } catch {
-      return null;
+      return true;
     }
   }
 }

@@ -1,0 +1,218 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String         @id @default(cuid())
+  email           String         @unique
+  passwordHash    String?
+  name            String?
+  avatarUrl       String?
+  role             UserRole       @default(USER)
+  refreshTokenHash String?
+  expiresAt        DateTime?
+  pendingDeletion Boolean        @default(false)
+  emailVerified   Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+  addresses       Address[]
+  emailLogs       EmailLog[]
+  orders          Order[]
+  wishlistItems   WishlistItem[]
+
+  @@index([deletedAt])
+  @@index([expiresAt])
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  street     String
+  city       String
+  state      String?
+  postalCode String
+  country    String
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order      Order[]
+
+  @@index([userId])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  products    Product[]
+}
+
+model Product {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  description String
+  price       Decimal          @db.Decimal(10, 2)
+  categoryId  String
+  images      String[]
+  rating      Decimal          @default(0) @db.Decimal(3, 2)
+  reviewCount Int              @default(0)
+  featured    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  deletedAt   DateTime?
+  category    Category         @relation(fields: [categoryId], references: [id])
+  variants    ProductVariant[]
+  wishlists   WishlistItem[]
+
+  @@index([categoryId])
+  @@index([deletedAt])
+  @@index([slug])
+}
+
+model ProductVariant {
+  id        String      @id @default(cuid())
+  productId String
+  size      String?
+  color     String?
+  stock     Int         @default(0)
+  sku       String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  OrderItem OrderItem[]
+  product   Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  userId            String
+  status            OrderStatus @default(PENDING)
+  shippingAddressId String
+  subtotal          Decimal     @db.Decimal(10, 2)
+  shippingCost      Decimal     @default(0) @db.Decimal(10, 2)
+  tax               Decimal     @default(0) @db.Decimal(10, 2)
+  total             Decimal     @db.Decimal(10, 2)
+  couponId          String?
+  trackingNumber    String?
+  notes             String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  Coupon            Coupon?     @relation(fields: [couponId], references: [id])
+  Address           Address     @relation(fields: [shippingAddressId], references: [id])
+  user              User        @relation(fields: [userId], references: [id])
+  orderItems        OrderItem[]
+
+  @@index([status])
+  @@index([userId])
+}
+
+model OrderItem {
+  id               String         @id @default(cuid())
+  orderId          String
+  productVariantId String
+  productName      String
+  variantLabel     String
+  quantity         Int
+  unitPrice        Decimal        @db.Decimal(10, 2)
+  order            Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  ProductVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+
+  @@index([orderId])
+}
+
+model Coupon {
+  id             String     @id @default(cuid())
+  code           String     @unique
+  type           CouponType
+  discount       Decimal    @db.Decimal(10, 2)
+  minOrderAmount Decimal?   @db.Decimal(10, 2)
+  usageLimit     Int?
+  usageCount     Int        @default(0)
+  expiresAt      DateTime?
+  active         Boolean    @default(true)
+  createdAt      DateTime   @default(now())
+  Order          Order[]
+
+  @@index([code])
+}
+
+model NewsletterSubscriber {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  subscribedAt     DateTime @default(now())
+  unsubscribeToken String   @unique
+  active           Boolean  @default(true)
+}
+
+model EmailLog {
+  id        String      @id @default(cuid())
+  userId    String?
+  recipient String
+  type      EmailType
+  status    EmailStatus @default(QUEUED)
+  subject   String?
+  error     String?
+  sentAt    DateTime?
+  createdAt DateTime    @default(now())
+  user      User?       @relation(fields: [userId], references: [id])
+
+  @@index([status])
+  @@index([type])
+  @@index([userId])
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum EmailType {
+  WELCOME
+  ORDER_CONFIRMATION
+  ORDER_STATUS_UPDATE
+  ACCOUNT_EXPIRY_WARNING
+  PASSWORD_RESET
+  NEWSLETTER
+}
+
+enum EmailStatus {
+  QUEUED
+  SENT
+  FAILED
+}
+
+enum CouponType {
+  PERCENTAGE
+  FIXED
+}

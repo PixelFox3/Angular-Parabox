@@ -1,0 +1,131 @@
+:host {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1rem 3rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 10px 40px var(--shadow-color);
+    padding: 2rem 2.25rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.logo-brand {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 0.14em;
+    margin-bottom: 0.6rem;
+}
+
+.auth-header h1 {
+    margin: 0;
+    font-size: 1.55rem;
+    color: var(--text-color);
+}
+
+.subtitle {
+    margin: 0.5rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+
+    a {
+        color: var(--accent-text);
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.35rem;
+
+    label {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    input {
+        border: 1px solid var(--border-color);
+        border-radius: 9px;
+        padding: 0.6rem 0.7rem;
+        background: var(--background-color);
+        color: var(--text-color);
+        font: inherit;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        &.invalid {
+            border-color: #e05050;
+        }
+    }
+
+    .field-error {
+        font-size: 0.8rem;
+        color: #e05050;
+        margin: 0;
+    }
+}
+
+.error-banner {
+    background: color-mix(in srgb, #e05050 12%, transparent);
+    border: 1px solid color-mix(in srgb, #e05050 40%, transparent);
+    border-radius: 9px;
+    padding: 0.75rem;
+    color: #e05050;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--accent-color) 75%, white);
+    background: linear-gradient(120deg, color-mix(in srgb, var(--accent-color) 82%, black), var(--accent-color));
+    color: var(--text-on-accent);
+    border-radius: 10px;
+    padding: 0.75rem;
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 0.25rem;
+
+    &:hover:not(:disabled) {
+        opacity: 0.9;
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}

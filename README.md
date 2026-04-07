@@ -1,7 +1,7 @@
 # PARABOX - E-Commerce Showcase Angular
 
-[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-paraboxstore.vercel.app-00b8d9?style=for-the-badge&logo=vercel&logoColor=white)](https://paraboxstore.vercel.app)
-[![Roadmap](https://img.shields.io/badge/🗺️%20Roadmap-ver%20fases-0077aa?style=for-the-badge&logo=github&logoColor=white)](./roadmap.md)
+[![Live Demo](https://img.shields.io/badge/%20Live%20Demo-00b8d9?style=for-the-badge&logo=vercel&logoColor=white)](https://paraboxstore.vercel.app)
+[![Roadmap](https://img.shields.io/badge/%20Roadmap-0077aa?style=for-the-badge&logo=github&logoColor=white)](./roadmap.md)
 
 Un proyecto de e-commerce moderno construido con **Angular 21** demostrando las mejores prácticas y patrones arquitectónicos actuales en desarrollo Angular.
 

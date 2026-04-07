@@ -7,7 +7,14 @@
 
         <!-- Navigation Links -->
         <div class="nav-links">
-            <a routerLink="/cliente" class="nav-link">Mi Cuenta</a>
+            @if (currentUser()) {
+            <a routerLink="/cliente" class="nav-link user-menu">
+                <span class="user-avatar" aria-hidden="true">{{ initials() }}</span>
+                <span class="user-name">{{ displayName() }}</span>
+            </a>
+            } @else {
+            <a routerLink="/login" class="nav-link login-btn">Iniciar sesión</a>
+            }
             <a routerLink="/cart" class="nav-link">
                 Carrito
                 @if (cartService.itemCount() > 0) {

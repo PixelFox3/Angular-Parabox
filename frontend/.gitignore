@@ -1,0 +1,15 @@
+# ─── Angular cache & build ──────────────────────────────────────────────────
+.angular/cache
+out-tsc
+bazel-out
+
+# ─── Test & coverage ────────────────────────────────────────────────────────
+coverage
+__screenshots__/
+
+# ─── Misc ───────────────────────────────────────────────────────────────────
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+typings

@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as v;
+
 :host {
     display: block;
 }
@@ -154,7 +156,61 @@
     }
 
     .logo {
-        width: 40px;
         height: 40px;
+    }
+}
+
+// Auth menu
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-avatar {
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: v.$font-size-xs;
+    font-weight: v.$font-weight-bold;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
+    transition: border-color 0.25s ease;
+
+    .user-menu:hover & {
+        border-color: var(--primary-color);
+    }
+}
+
+.user-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: v.$breakpoint-md) {
+        display: none;
+    }
+}
+
+.login-btn {
+    padding: 0.3rem 0.85rem;
+    border: 2px solid var(--primary-color);
+    border-radius: v.$radius-medium;
+    color: var(--primary-color);
+    font-weight: v.$font-weight-semibold;
+
+    &::after {
+        display: none;
+    }
+
+    &:hover {
+        background-color: var(--primary-color);
+        color: var(--background-color);
     }
 }
