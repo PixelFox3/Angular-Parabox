@@ -22,6 +22,7 @@ model User {
   updatedAt       DateTime       @updatedAt
   deletedAt       DateTime?
   addresses       Address[]
+  cart            Cart?
   emailLogs       EmailLog[]
   orders          Order[]
   wishlistItems   WishlistItem[]
@@ -71,6 +72,7 @@ model Product {
   updatedAt   DateTime         @updatedAt
   deletedAt   DateTime?
   category    Category         @relation(fields: [categoryId], references: [id])
+  cartItems   CartItem[]
   variants    ProductVariant[]
   wishlists   WishlistItem[]
 
@@ -157,6 +159,29 @@ model Coupon {
   Order          Order[]
 
   @@index([code])
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+  @@index([cartId])
 }
 
 model NewsletterSubscriber {

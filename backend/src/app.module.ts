@@ -6,6 +6,7 @@ import { HealthModule } from './modules/health/health.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { CartModule } from './modules/cart/cart.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './modules/users/users.module';
         HealthModule,
         AuthModule,
         UsersModule,
+        CartModule,
     ],
 })
 export class AppModule { }

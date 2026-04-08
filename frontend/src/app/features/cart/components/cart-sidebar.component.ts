@@ -38,15 +38,15 @@ export class CartSidebarComponent {
     this.cartService.closeDrawer();
   }
 
-  increment(productId: number): void {
+  increment(productId: string): void {
     this.cartService.incrementQuantity(productId);
   }
 
-  decrement(productId: number): void {
+  decrement(productId: string): void {
     this.cartService.decrementQuantity(productId);
   }
 
-  remove(productId: number): void {
+  remove(productId: string): void {
     this.cartService.removeFromCart(productId);
   }
 

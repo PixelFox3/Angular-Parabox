@@ -1,4 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://parabox-api.up.railway.app/api',
+    apiUrl: 'https://angular-parabox-production.up.railway.app/api',
+
 };

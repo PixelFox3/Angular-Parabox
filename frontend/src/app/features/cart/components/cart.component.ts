@@ -34,15 +34,15 @@ export class CartComponent {
     return this.storeConfig.showPricesWithTax;
   }
 
-  incrementQuantity(productId: number): void {
+  incrementQuantity(productId: string): void {
     this.cartService.incrementQuantity(productId);
   }
 
-  decrementQuantity(productId: number): void {
+  decrementQuantity(productId: string): void {
     this.cartService.decrementQuantity(productId);
   }
 
-  removeFromCart(productId: number): void {
+  removeFromCart(productId: string): void {
     this.cartService.removeFromCart(productId);
   }
 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import itemsData from '../../../Items.json';
 
 export interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     description: string;
@@ -25,7 +25,7 @@ export class ProductService {
     private readonly products: Product[] = (itemsData as CatalogItem[]).map((item) => {
         const imageName = item.imagen.split('/').pop() ?? '';
         return {
-            id: item.id,
+            id: String(item.id),
             name: item.nombre,
             price: item.precio,
             description: item.descripcion,
@@ -37,7 +37,7 @@ export class ProductService {
         return this.products;
     }
 
-    getProductById(id: number): Product | undefined {
+    getProductById(id: string): Product | undefined {
         return this.products.find(p => p.id === id);
     }
 }

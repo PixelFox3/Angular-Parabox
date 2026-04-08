@@ -52,13 +52,13 @@ Angular-Parabox/
 * [x] Frontend → **Vercel** *(ya configurado — deploy automático en cada push, preview URL por PR)*
 * [x] Base de datos → **Postgres en Railway**
 * [x] Backend API → **Railway** (aloja el proceso NestJS — distinto de la BD)
-* [ ] URL pública disponible desde el primer deploy vacío
+* [x] URL pública disponible desde el primer deploy vacío
 
 > ⚠️ NeonDB = solo base de datos. Railway/Render = solo el servidor API. Ambos son necesarios cuando llegue el backend.
 
 ## 📖 Documentación base
 
-* [ ] README con arquitectura, stack, instrucciones de setup local y enlaces al deploy
+* [x] README con arquitectura, stack, instrucciones de setup local y enlaces al deploy
 * [ ] Health check endpoint `GET /api/health` (primer endpoint de la API)
 * [ ] Swagger / OpenAPI configurado desde el inicio (se va poblando con cada endpoint)
 
@@ -303,12 +303,14 @@ Angular-Parabox/
 > Los ítems críticos (guards, env vars, interceptor) ya están desde fases anteriores. Aquí se hace el endurecimiento completo.
 
 * [ ] Rate limiting en endpoints públicos (login, registro, newsletter)
+* [ ] CORS — restringir el backend para aceptar solo peticiones desde el dominio de Vercel (`app.enableCors({ origin: '...' })`)
 * [ ] CSRF protection en formularios
 * [ ] Protección de endpoints backend por roles (admin / user)
 * [ ] Sanitización de inputs en frontend y backend
 * [ ] Auditoría de headers HTTP (Helmet en NestJS)
 * [ ] GDPR / Banner de consentimiento de cookies
 * [ ] Política de privacidad y T&C (páginas estáticas)
+* [ ] WAF *(nice-to-have para producción real)* — Cloudflare delante del backend para bloquear bots, scrapers y ataques DDoS antes de que lleguen al servidor
 
 ---
 
