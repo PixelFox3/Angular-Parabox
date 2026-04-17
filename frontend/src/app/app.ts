@@ -28,9 +28,16 @@ import { ToastComponent } from './shared/components/toast.component';
 
     .main-content {
       flex: 1;
+      padding-top: 82px;
       background-color: var(--background-color);
       color: var(--text-color);
       transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding-top: 70px;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

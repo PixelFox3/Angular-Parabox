@@ -1,12 +1,13 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { Subject, firstValueFrom, debounceTime, switchMap } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { environment } from '../../../../environments/environment';
 
 const GUEST_CART_KEY = 'parabox_cart';
+const DEBOUNCE_MS = 400;
 
 // Minimal product shape stored in the cart (no description needed for display)
 export interface CartProduct {
@@ -74,6 +75,9 @@ export class CartService {
     // Track whether the initial cart load has already happened
     private cartInitialized = false;
 
+    // Per-product debounce subjects keyed by productId
+    private readonly pendingUpdates = new Map<string, Subject<number>>();
+
     constructor() {
         // React to auth state: initialise on first run, handle login/logout transitions after.
         effect(() => {
@@ -129,24 +133,20 @@ export class CartService {
         this.drawerOpen.set(true);
 
         if (this.authService.isAuthenticated()) {
-            this.http
-                .put<ApiCart>(`${this.apiUrl}/items`, { productId: product.id, quantity: newQty })
-                .subscribe({
-                    next: cart => this.cartItems.set(cart.items.map(toCartItem)),
-                    error: () => { void this.loadServerCart(); },
-                });
+            this.scheduleSync(product.id, newQty);
         } else {
             this.persistGuestCart();
         }
     }
 
     removeFromCart(productId: string): void {
+        this.cancelPendingSync(productId);
         this.cartItems.update(items => items.filter(i => i.product.id !== productId));
 
         if (this.authService.isAuthenticated()) {
             this.http
                 .delete<ApiCart>(`${this.apiUrl}/items/${productId}`)
-                .subscribe({ next: cart => this.cartItems.set(cart.items.map(toCartItem)) });
+                .subscribe({ next: cart => this.syncServerCart(cart) });
         } else {
             this.persistGuestCart();
         }
@@ -163,9 +163,7 @@ export class CartService {
         );
 
         if (this.authService.isAuthenticated()) {
-            this.http
-                .put<ApiCart>(`${this.apiUrl}/items`, { productId, quantity })
-                .subscribe({ next: cart => this.cartItems.set(cart.items.map(toCartItem)) });
+            this.scheduleSync(productId, quantity);
         } else {
             this.persistGuestCart();
         }
@@ -182,12 +180,13 @@ export class CartService {
     }
 
     clearCart(): void {
+        this.pendingUpdates.forEach((_, id) => this.cancelPendingSync(id));
         this.cartItems.set([]);
 
         if (this.authService.isAuthenticated()) {
             this.http
                 .delete<ApiCart>(this.apiUrl)
-                .subscribe({ next: cart => this.cartItems.set(cart.items.map(toCartItem)) });
+                .subscribe({ next: cart => this.syncServerCart(cart) });
         } else {
             this.clearGuestCart();
         }
@@ -201,10 +200,56 @@ export class CartService {
 
     // ── Private helpers ───────────────────────────────────────────────────────
 
+    // Debounced per-product write: many quick clicks → single HTTP request
+    private scheduleSync(productId: string, quantity: number): void {
+        if (!this.pendingUpdates.has(productId)) {
+            const subject = new Subject<number>();
+            this.pendingUpdates.set(productId, subject);
+
+            subject.pipe(
+                debounceTime(DEBOUNCE_MS),
+                switchMap(qty =>
+                    this.http.put<ApiCart>(`${this.apiUrl}/items`, { productId, quantity: qty }),
+                ),
+            ).subscribe({
+                next: cart => this.syncServerItem(productId, cart),
+                error: () => { void this.loadServerCart(); },
+            });
+        }
+        this.pendingUpdates.get(productId)!.next(quantity);
+    }
+
+    private cancelPendingSync(productId: string): void {
+        const subject = this.pendingUpdates.get(productId);
+        if (subject) {
+            subject.complete();
+            this.pendingUpdates.delete(productId);
+        }
+    }
+
+    // Only update the single changed item — avoids overwriting concurrent edits on other items
+    private syncServerItem(productId: string, cart: ApiCart): void {
+        const serverItem = cart.items.find(i => i.productId === productId);
+        if (!serverItem) {
+            // Item was removed on the server (e.g. product deleted)
+            this.cartItems.update(items => items.filter(i => i.product.id !== productId));
+            return;
+        }
+        const confirmed = toCartItem(serverItem);
+        this.cartItems.update(items =>
+            items.map(i => i.product.id === productId ? confirmed : i),
+        );
+    }
+
+    // Full cart overwrite — used only for merge/load/clear operations
+    private syncServerCart(cart: ApiCart): void {
+        this.cartItems.set(cart.items.map(toCartItem));
+    }
+
     private async loadServerCart(): Promise<void> {
         try {
             const cart = await firstValueFrom(this.http.get<ApiCart>(this.apiUrl));
-            this.cartItems.set(cart.items.map(toCartItem));
+            this.syncServerCart(cart);
         } catch {
             this.cartItems.set([]);
         }
@@ -223,7 +268,7 @@ export class CartService {
                         })),
                     }),
                 );
-                this.cartItems.set(cart.items.map(toCartItem));
+                this.syncServerCart(cart);
                 this.clearGuestCart();
                 this.toast.show('Tu carrito ha sido guardado en tu cuenta', 'success');
             } catch {

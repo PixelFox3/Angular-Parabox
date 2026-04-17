@@ -12,6 +12,7 @@
     height: 100%;
     transition: all 0.3s ease;
     box-shadow: 0 8px 14px var(--shadow-color);
+    container-type: inline-size;
 
     &:hover {
         box-shadow: 0 12px 28px var(--shadow-color);
@@ -62,6 +63,7 @@
     align-items: center;
     gap: 1rem;
     margin-top: auto;
+    flex-wrap: wrap;
 }
 
 .product-price {
@@ -112,5 +114,17 @@
     &:focus-visible {
         outline: 2px solid var(--primary-color);
         outline-offset: 2px;
+    }
+}
+
+// When card is narrow: stack price and button vertically
+@container (max-width: 260px) {
+    .product-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-add-cart {
+        text-align: center;
     }
 }

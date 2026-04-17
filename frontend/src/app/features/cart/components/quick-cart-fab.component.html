@@ -1,6 +1,12 @@
-<button class="fab" type="button" (click)="toggle()" aria-label="Abrir carrito">
-    <span class="icon">Carrito</span>
+<button class="fab" type="button" (click)="toggle()" aria-label="Abrir carrito de compras">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="fab-icon">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zm0 0h12M16 10a4 4 0 0 1-8 0"/>
+        <path fill-rule="evenodd" d="M1 6h22v2H1V6zm5 0L4 2h16l-2 4H6z" clip-rule="evenodd"/>
+    </svg>
+    <span class="fab-label">Carrito</span>
     @if (cartService.itemCount() > 0) {
-    <span class="badge">{{ cartService.itemCount() }}</span>
+    <span class="badge" aria-label="{{ cartService.itemCount() }} artículos en el carrito">
+        {{ cartService.itemCount() }}
+    </span>
     }
 </button>

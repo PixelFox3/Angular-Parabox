@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { CartService } from '../../features/cart/services/cart.service';
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -13,7 +12,6 @@ import { AuthService } from '../../core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  readonly cartService = inject(CartService);
   readonly themeService = inject(ThemeService);
   private readonly authService = inject(AuthService);
 
