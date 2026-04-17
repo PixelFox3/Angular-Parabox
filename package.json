@@ -10,6 +10,7 @@
         "frontend:test": "npm test --prefix frontend",
         "backend:install": "npm install --prefix backend",
         "backend:start": "npm run start:dev --prefix backend",
+        "backend:start:prod": "npm run build --prefix backend && node backend/dist/main",
         "backend:build": "npm run build --prefix backend",
         "docker:up": "docker compose up",
         "docker:down": "docker compose down"
